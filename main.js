@@ -31,6 +31,7 @@ const EN = {
   "fq.q5":"Do you work with clients outside Brazil?","fq.a5":"Yes! I work remotely and serve international clients through Upwork or directly, communicating by message.",
   "ft.r":"All rights reserved"
 };
+Object.assign(EN, window.EN_EXTRA || {});
 const PT = {};
 document.querySelectorAll("[data-i18n]").forEach(el => PT[el.dataset.i18n] = el.textContent);
 document.querySelectorAll("[data-i18n-html]").forEach(el => PT[el.dataset.i18nHtml] = el.innerHTML);
@@ -40,7 +41,8 @@ function setLang(lang){
   document.querySelectorAll("[data-i18n]").forEach(el => { const v = dict[el.dataset.i18n]; if (v) el.textContent = v; });
   document.querySelectorAll("[data-i18n-html]").forEach(el => { const v = dict[el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
   document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
-  document.title = lang === "en" ? "Gisele Cunha · Gridly AI Studio — Conversion Architecture" : "Gisele Cunha · Gridly AI Studio — Arquitetura de Conversão";
+  const ds = document.documentElement.dataset;
+  document.title = lang === "en" ? (ds.titleEn || "Gisele Cunha · Gridly AI Studio — Conversion Architecture") : (ds.titlePt || "Gisele Cunha · Gridly AI Studio — Arquitetura de Conversão");
   document.querySelectorAll(".lang button").forEach(b => b.classList.toggle("active", b.dataset.lang === lang));
   try { localStorage.setItem("lang", lang); } catch (e) {}
 }
@@ -53,9 +55,34 @@ if (initial === "en") setLang("en");
 
 // --- carousel -------------------------------------------------------
 const car = document.getElementById("carousel");
-const step = () => (car.querySelector(".card")?.offsetWidth || 360) + 18;
-document.querySelector(".car-btn.prev").addEventListener("click", () => car.scrollBy({ left: -step(), behavior: "smooth" }));
-document.querySelector(".car-btn.next").addEventListener("click", () => car.scrollBy({ left: step(), behavior: "smooth" }));
+if (car) {
+  const step = () => (car.querySelector(".card")?.offsetWidth || 360) + 18;
+  document.querySelector(".car-btn.prev").addEventListener("click", () => car.scrollBy({ left: -step(), behavior: "smooth" }));
+  document.querySelector(".car-btn.next").addEventListener("click", () => car.scrollBy({ left: step(), behavior: "smooth" }));
+}
+
+// --- project filters ------------------------------------------------
+document.querySelectorAll(".filters button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".filters button").forEach(x => x.classList.toggle("active", x === b));
+  const f = b.dataset.filter;
+  document.querySelectorAll(".plist .pcard").forEach(c => { c.hidden = f !== "all" && c.dataset.cat !== f; });
+}));
+
+// --- full-page preview: hover to scroll ------------------------------
+const canHover = window.matchMedia("(hover: hover)").matches;
+document.querySelectorAll(".preview").forEach(pv => {
+  const im = pv.querySelector("img");
+  if (!canHover) return;
+  const go = down => {
+    const dist = Math.max(0, im.offsetHeight - pv.clientHeight);
+    im.style.transitionDuration = (down ? Math.max(2, dist / 450) : Math.max(1, dist / 2500)) + "s";
+    im.style.transform = down ? `translateY(-${dist}px)` : "translateY(0)";
+  };
+  pv.addEventListener("mouseenter", () => go(true));
+  pv.addEventListener("mouseleave", () => go(false));
+  pv.addEventListener("focus", () => go(true));
+  pv.addEventListener("blur", () => go(false));
+});
 
 // --- reveal on scroll ------------------------------------------------
 const io = new IntersectionObserver(entries => {
