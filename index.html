@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gisele Cunha · Gridly AI Studio — Arquitetura de Conversão</title>
+<meta name="description" content="Gisele Cunha — landing pages, páginas de vendas e identidade visual para profissionais da saúde, educação e infoprodutores.">
+<meta property="og:title" content="Gisele Cunha — Arquitetura de Conversão">
+<meta property="og:description" content="Landing pages, páginas de vendas e identidade visual para saúde e educação.">
+<meta property="og:image" content="/assets/hero.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav-wrap">
+  <nav class="nav">
+    <a href="#inicio" class="nav-avatar" aria-label="Gisele Cunha"><span></span></a>
+    <a href="#inicio" data-i18n="nav.home">Início</a>
+    <a href="#projetos" data-i18n="nav.projects">Projetos</a>
+    <a href="#servicos" data-i18n="nav.services">Serviços</a>
+    <a href="#sobre" data-i18n="nav.about">Sobre</a>
+    <a href="#contato" class="nav-cta" data-i18n="nav.contact">Contato</a>
+  </nav>
+  <div class="lang" role="group" aria-label="Idioma">
+    <button data-lang="en">EN</button><span>·</span><button data-lang="pt" class="active">PT</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <p class="hero-hello"><span data-i18n="hero.hello">Prazer,</span> <em>Gisele Cunha</em></p>
+    <h1 class="hero-title">
+      <span data-i18n="hero.t1">Arquitetura</span>
+      <span class="grad" data-i18n="hero.t2">de conversão</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero.sub">Landing pages, páginas de vendas e identidade visual para profissionais da saúde, educação e infoprodutores que querem vender com estratégia.</p>
+    <div class="hero-ctas">
+      <a href="#projetos" class="btn btn-steel"><span data-i18n="hero.cta1">Ver projetos</span> <i>↗</i></a>
+      <a href="#contato" class="btn btn-ghost" data-i18n="hero.cta2">Pedir orçamento</a>
+    </div>
+    <div class="socials">
+      <a href="https://www.behance.net/giseleecunha" target="_blank" rel="noopener">Behance</a>
+      <a href="https://www.upwork.com/freelancers/~017cef40f218c12bb2" target="_blank" rel="noopener">Upwork</a>
+      <a href="mailto:cunhagiih18@gmail.com">E-mail</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement reveal">
+  <p data-i18n="st.pre">Cada projeto aqui une</p>
+  <h2 class="serif"><span class="c1" data-i18n="st.a">estratégia</span> <span class="c2" data-i18n="st.b">design</span> <span class="c3" data-i18n="st.c">conversão</span></h2>
+  <p class="muted" data-i18n="st.post">pra resolver um problema real: transformar audiência em vendas.</p>
+</section>
+
+<!-- PROJECTS -->
+<section id="projetos" class="projects">
+  <div class="carousel-wrap">
+    <button class="car-btn prev" aria-label="Anterior">‹</button>
+    <div class="carousel" id="carousel">
+      <a class="card" href="https://www.upwork.com/freelancers/~017cef40f218c12bb2" target="_blank" rel="noopener">
+        <img src="/assets/p-cbef.webp" alt="CBEF — identidade de congresso médico" loading="lazy">
+        <div class="tags"><span data-i18n="tag.identity">Identidade Visual</span><span data-i18n="tag.event">Evento</span></div>
+        <div class="card-info"><b data-i18n="p.cbef">CBEF — Congresso de Endocrinologia</b></div>
+      </a>
+      <a class="card" href="https://www.behance.net/gallery/233376235" target="_blank" rel="noopener">
+        <img src="/assets/p-biomecanica.webp" alt="Página de vendas — Pós em Biomecânica" loading="lazy">
+        <div class="tags"><span data-i18n="tag.sales">Página de Vendas</span></div>
+        <div class="card-info"><b data-i18n="p.bio">Pós em Biomecânica Clínica</b></div>
+      </a>
+      <a class="card" href="https://www.behance.net/gallery/240602361" target="_blank" rel="noopener">
+        <img src="/assets/p-podologia.webp" alt="Página de vendas — Pós em Podologia" loading="lazy">
+        <div class="tags"><span data-i18n="tag.sales">Página de Vendas</span></div>
+        <div class="card-info"><b data-i18n="p.pod">Pós em Podologia Clínica</b></div>
+      </a>
+      <a class="card" href="https://www.behance.net/gallery/240603275" target="_blank" rel="noopener">
+        <img src="/assets/p-diogo.webp" alt="Landing page — Dr. Diogo Viana" loading="lazy">
+        <div class="tags"><span data-i18n="tag.launch">Lançamento</span></div>
+        <div class="card-info"><b>Dr. Diogo Viana — Dia do Médico</b></div>
+      </a>
+      <a class="card" href="https://www.behance.net/gallery/257158429" target="_blank" rel="noopener">
+        <img src="/assets/p-llubiana.webp" alt="Landing page — Dra. Llubiana Arantes" loading="lazy">
+        <div class="tags"><span>Landing Page</span></div>
+        <div class="card-info"><b data-i18n="p.llu">Dra. Llubiana Arantes — Neurociência</b></div>
+      </a>
+      <a class="card" href="https://www.behance.net/gallery/257158057" target="_blank" rel="noopener">
+        <img src="/assets/p-cristianne.webp" alt="Landing page — Dra. Cristianne Fabris" loading="lazy">
+        <div class="tags"><span>Landing Page</span></div>
+        <div class="card-info"><b data-i18n="p.cri">Dra. Cristianne Fabris — Urologia</b></div>
+      </a>
+      <a class="card" href="https://www.behance.net/gallery/257159265" target="_blank" rel="noopener">
+        <img src="/assets/p-scarpa.webp" alt="Site institucional — Leandro Scarpa" loading="lazy">
+        <div class="tags"><span data-i18n="tag.inst">Institucional</span></div>
+        <div class="card-info"><b data-i18n="p.sca">Leandro Scarpa — Fisioterapia</b></div>
+      </a>
+      <a class="card" href="https://www.behance.net/gallery/257106377" target="_blank" rel="noopener">
+        <img src="/assets/p-contima.webp" alt="Contima — identidade visual" loading="lazy">
+        <div class="tags"><span data-i18n="tag.identity">Identidade Visual</span></div>
+        <div class="card-info"><b data-i18n="p.con">Contima — Contabilidade</b></div>
+      </a>
+      <a class="card" href="https://www.behance.net/gallery/257161323" target="_blank" rel="noopener">
+        <img src="/assets/p-agni.webp" alt="Página de vendas — Agni" loading="lazy">
+        <div class="tags"><span data-i18n="tag.sales">Página de Vendas</span></div>
+        <div class="card-info"><b data-i18n="p.agn">Agni — Jornada do Despertar</b></div>
+      </a>
+    </div>
+    <button class="car-btn next" aria-label="Próximo">›</button>
+  </div>
+  <div class="center"><a class="btn btn-dark" href="https://www.behance.net/giseleecunha" target="_blank" rel="noopener" data-i18n="proj.all">Ver todos os projetos</a></div>
+</section>
+
+<!-- BANNER DIAGNÓSTICO -->
+<section class="banner banner-right reveal" style="--bg:url('/assets/diagnostico.webp')">
+  <div class="banner-content">
+    <h2 class="grad-text" data-i18n="diag.t">Diagnóstico de Conversão</h2>
+    <p data-i18n-html="diag.p">Analiso suas páginas e identifico o que pode estar <b>travando suas vendas.</b></p>
+    <a href="mailto:cunhagiih18@gmail.com?subject=Diagn%C3%B3stico%20de%20Convers%C3%A3o" class="btn btn-steel"><span data-i18n="diag.cta">Fazer diagnóstico</span> <i>↗</i></a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="servicos" class="services">
+  <div class="services-text reveal">
+    <h2 class="h2"><span data-i18n="sv.t1">O que eu posso</span><br><em class="serif grad-text" data-i18n="sv.t2">resolver pra você</em></h2>
+    <p class="muted" data-i18n="sv.p">Uno estratégia de conversão e design pra construir páginas e marcas que vendem — não só bonitas.</p>
+    <div class="accordion">
+      <details open>
+        <summary><span>1.</span> <span data-i18n="sv.a.t">Landing pages & páginas de vendas</span></summary>
+        <ul>
+          <li data-i18n="sv.a.1">Estratégia e arquitetura da página, dobra a dobra</li>
+          <li data-i18n="sv.a.2">Design no Figma, responsivo de verdade</li>
+          <li data-i18n="sv.a.3">Montagem em Elementor/WordPress, Framer ou Wix</li>
+          <li data-i18n="sv.a.4">Diagnóstico e otimização de páginas que já existem</li>
+        </ul>
+      </details>
+      <details>
+        <summary><span>2.</span> <span data-i18n="sv.b.t">Estratégia para lançamentos</span></summary>
+        <ul>
+          <li data-i18n="sv.b.1">Páginas de captura, vendas e obrigado</li>
+          <li data-i18n="sv.b.2">Funis organizados para eventos e campanhas</li>
+          <li data-i18n="sv.b.3">Criativos para anúncios no feed e stories</li>
+        </ul>
+      </details>
+      <details>
+        <summary><span>3.</span> <span data-i18n="sv.c.t">Identidade visual & social</span></summary>
+        <ul>
+          <li data-i18n="sv.c.1">Logo, manual de marca e key visual</li>
+          <li data-i18n="sv.c.2">Peças de evento: credenciais, kit, sinalização</li>
+          <li data-i18n="sv.c.3">Carrosséis e templates para redes sociais</li>
+        </ul>
+      </details>
+    </div>
+  </div>
+  <div class="services-img reveal"><img src="/assets/cubes.webp" alt="" loading="lazy"></div>
+</section>
+
+<!-- BANNER LANÇAMENTOS -->
+<section class="banner banner-left reveal" style="--bg:url('/assets/lancamentos.webp')">
+  <div class="banner-content">
+    <h2 class="grad-text" data-i18n="la.t">Estratégia para Lançamentos</h2>
+    <p data-i18n="la.p">Páginas e funis organizados estrategicamente para experts que querem lançar com mais previsibilidade.</p>
+    <a href="#contato" class="btn btn-steel"><span data-i18n="la.cta">Aplicar para projeto</span> <i>↗</i></a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="sobre" class="about">
+  <div class="about-photo reveal"><div class="photo" style="background-image:url('/assets/diagnostico.webp')"></div></div>
+  <div class="about-text reveal">
+    <h2 class="h2"><span data-i18n="ab.t1">Oi, eu sou a</span><br><em class="serif grad-text">Gisele Cunha</em></h2>
+    <p data-i18n="ab.p1">Designer e estrategista digital de Gaspar, SC. Comecei no design criando landing pages e hoje ajudo profissionais da saúde e da educação que já têm audiência, mas ainda não têm uma estrutura digital que venda.</p>
+    <p data-i18n="ab.p2">Não faço só web design: penso a arquitetura de cada página — o que o visitante precisa ver, em que ordem, até tomar a decisão.</p>
+    <div class="stats">
+      <div><b>4+</b><span data-i18n="ab.s1">anos de experiência</span></div>
+      <div><b>20+</b><span data-i18n="ab.s2">projetos publicados</span></div>
+      <div><b data-i18n="ab.s3b">Saúde</b><span data-i18n="ab.s3">& educação como nicho</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contato" class="contact reveal">
+  <div class="contact-card">
+    <h2 class="h2" data-i18n="ct.t">Vamos trabalhar juntos</h2>
+    <p class="muted" data-i18n="ct.p">Se você está estruturando seu infoproduto, preparando um lançamento ou precisa de uma página que converta, me conta sua ideia.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-steel" href="mailto:cunhagiih18@gmail.com?subject=Or%C3%A7amento%20de%20projeto"><span data-i18n="ct.cta1">Solicitar orçamento</span> <i>↗</i></a>
+      <a class="btn btn-ghost" href="https://www.upwork.com/freelancers/~017cef40f218c12bb2" target="_blank" rel="noopener" data-i18n="ct.cta2">Me contratar pelo Upwork</a>
+    </div>
+    <img class="contact-img" src="/assets/paginas.webp" alt="" loading="lazy">
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <h2 class="h2 reveal"><span data-i18n="fq.t1">Perguntas</span> <em class="serif grad-text" data-i18n="fq.t2">frequentes</em></h2>
+  <div class="accordion faq-list">
+    <details><summary data-i18n="fq.q1">Quais serviços você oferece?</summary><p data-i18n="fq.a1">Landing pages, páginas de vendas, sites institucionais, identidade visual, peças de evento e criativos para redes sociais — da estratégia à página no ar.</p></details>
+    <details><summary data-i18n="fq.q2">Como funciona o processo?</summary><p data-i18n="fq.a2">Começa com um briefing pra entender seu objetivo e público. Depois vem a arquitetura da página, o design no Figma, ajustes e a montagem. Você acompanha cada etapa.</p></details>
+    <details><summary data-i18n="fq.q3">Quanto tempo leva um projeto?</summary><p data-i18n="fq.a3">Depende do escopo. Uma landing page costuma levar de 1 a 2 semanas; marca + página, de 3 a 5 semanas.</p></details>
+    <details><summary data-i18n="fq.q4">Em quais plataformas você monta?</summary><p data-i18n="fq.a4">Elementor/WordPress, Framer e Wix. O design é sempre feito no Figma antes.</p></details>
+    <details><summary data-i18n="fq.q5">Você atende clientes de fora do Brasil?</summary><p data-i18n="fq.a5">Sim! Trabalho de forma remota e atendo clientes internacionais pelo Upwork ou diretamente, com comunicação por mensagem.</p></details>
+  </div>
+</section>
+
+<footer class="footer">
+  <div><small>E-MAIL</small><a href="mailto:cunhagiih18@gmail.com">cunhagiih18@gmail.com</a></div>
+  <div><small>PORTFÓLIO</small><a href="https://www.behance.net/giseleecunha" target="_blank" rel="noopener">behance.net/giseleecunha</a></div>
+  <div><small>UPWORK</small><a href="https://www.upwork.com/freelancers/~017cef40f218c12bb2" target="_blank" rel="noopener">Gisele C.</a></div>
+  <p class="copy">© 2026 Gisele Cunha · Gridly AI Studio · <span data-i18n="ft.r">Todos os direitos reservados</span></p>
+</footer>
+
+<script src="/main.js"></script>
+</body>
+</html>
