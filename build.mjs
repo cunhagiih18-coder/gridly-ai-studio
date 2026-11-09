@@ -70,6 +70,8 @@ if (failed) process.exit(1);
 const esc = s => String(s).replace(/ — /g, "\u00a0— ").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const BY = Object.fromEntries(PROJECTS.map(p => [p.slug, p]));
 const coverName = p => p.cover ? `p/${p.slug}/cover` : p.home;
+// Cards use the cover when it is close to 9:7, otherwise the Behance thumbnail (808×632).
+const thumbName = p => { const c = coverName(p); const [w, h] = dims[c] || [9, 7]; return (w / h < 1.12 || w / h > 1.5) && p.home ? p.home : c; };
 const img = (name, alt, { cls = "", eager = false, sizes = "" } = {}) => {
   const [w, h] = dims[name] || [1400, 1000];
   return `<img src="/assets/${name}.webp" width="${w}" height="${h}" alt="${esc(alt)}"${cls ? ` class="${cls}"` : ""}${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async"${sizes ? ` sizes="${sizes}"` : ""}>`;
@@ -216,7 +218,7 @@ const featuredHtml = FEATURED.map(({ slug, size, flip }) => {
   if (!p) throw new Error("FEATURED: unknown slug " + slug);
   return `
       <a class="work work-${size}${flip ? " work-flip" : ""}" href="/projetos/${p.slug}">
-        <figure class="work-img">${img(coverName(p), p.title)}</figure>${caption(p, { link: true })}
+        <figure class="work-img">${img(thumbName(p), p.title)}</figure>${caption(p, { link: true })}
       </a>`;
 }).join("");
 
@@ -289,7 +291,7 @@ const listBody = `
     </div>
     <div class="pgrid">${PROJECTS.map(p => `
       <a class="work work-card" href="/projetos/${p.slug}" data-cat="${p.cat}">
-        <figure class="work-img">${img(coverName(p), p.title)}</figure>${caption(p, { heading: "h2" })}
+        <figure class="work-img">${img(thumbName(p), p.title)}</figure>${caption(p, { heading: "h2" })}
       </a>`).join("")}
     </div>
   </div>
@@ -370,7 +372,7 @@ for (const [idx, p] of PROJECTS.entries()) {
     </div>
     <a class="next work" href="/projetos/${nx.slug}">
       <p class="label" data-i18n="cs.next">Próximo projeto</p>
-      <figure class="work-img">${img(coverName(nx), nx.title)}</figure>${caption(nx, { heading: "h2" })}
+      <figure class="work-img">${img(thumbName(nx), nx.title)}</figure>${caption(nx, { heading: "h2" })}
     </a>
   </section>
 </article>
