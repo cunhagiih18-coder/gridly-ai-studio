@@ -4,7 +4,7 @@
 import { mkdir, writeFile, copyFile } from "node:fs/promises";
 import sharp from "sharp";
 import { PROJECTS, CATS } from "./projects.mjs";
-import { HERO, FEATURED, SUMMARY, ARCHITECTURE } from "./content.mjs";
+import { ORDER, HERO, FEATURED, SUMMARY, ARCHITECTURE } from "./content.mjs";
 
 const FIG = "https://www.figma.com/api/mcp/asset/";
 const BH = "https://mir-s3-cdn-cf.behance.net/projects/808/";
@@ -67,8 +67,9 @@ console.log("assets:", assets.length - failed, "ok,", failed, "failed");
 if (failed) process.exit(1);
 
 // ---------- helpers ----------
-const esc = s => String(s).replace(/ — /g, "\u00a0— ").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const esc = s => String(s).replace(/ - /g, "\u00a0- ").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const BY = Object.fromEntries(PROJECTS.map(p => [p.slug, p]));
+const LIST = ORDER.filter(s => BY[s]).map(s => BY[s]).concat(PROJECTS.filter(p => !ORDER.includes(p.slug)));
 const coverName = p => p.cover ? `p/${p.slug}/cover` : p.home;
 // Cards use the cover when it is close to 9:7, otherwise the Behance thumbnail (808×632).
 const thumbName = p => { const c = coverName(p); const [w, h] = dims[c] || [9, 7]; return (w / h < 1.12 || w / h > 1.5) && p.home ? p.home : c; };
@@ -86,7 +87,7 @@ const EN = {
   "nav.projects": "Projects", "nav.services": "Services", "nav.about": "About", "nav.contact": "Contact", "nav.menu": "Menu",
   "hero.lead": "Strategy, design and development of pages for brands, courses and launches.",
   "hero.cta": "Explore projects",
-  "sel.label": "Selected projects", "sel.title": "Pages and brands built to be understood\u00a0— and chosen.",
+  "sel.label": "Selected projects", "sel.title": "Pages and brands built to be understood and chosen.",
   "sel.all": "See all projects", "case.open": "View case",
   "sv.label": "Services", "sv.title": "What the studio delivers",
   "sv.1.t": "Pages that sell", "sv.1.p": "Landing pages, sales pages and websites. I plan the page structure, design it in Figma and build it in Elementor/WordPress, Framer or Wix. I also audit and improve pages that already exist.",
@@ -97,7 +98,8 @@ const EN = {
   "ab.p2": "Before the layout comes the architecture: what the visitor needs to see, and in what order, before deciding. That is what the studio calls Conversion Architecture.",
   "ab.s1": "years designing pages", "ab.s2": "published projects",
   "ct.label": "Contact", "ct.t1": "Have a project in mind?", "ct.t2": "Let's talk.",
-  "ct.p": "Tell me what you are building — a page, a launch or a brand — and I will reply with next steps.",
+  "ct.p": "Tell me what you are building, whether a page, a launch or a brand, and I will reply with next steps.",
+  "cur.view": "View case", "mq.1": "Landing pages", "mq.2": "Sales pages", "mq.3": "Visual identity", "mq.4": "Websites", "mq.5": "Launches",
   "ct.cta": "Send an email", "ct.alt": "Also on",
   "ft.r": "All rights reserved",
   "pl.label": "Portfolio", "pl.title": "All projects",
@@ -137,7 +139,7 @@ const page = ({ title, titleEn, desc, og, body, cls = "" }) => `<!DOCTYPE html>
 <a class="skip" href="#main">Pular para o conteúdo</a>
 <header class="site-head">
   <div class="wrap head-row">
-    <a class="brand" href="/" aria-label="Gridly AI Studio — início">Gridly <span>AI Studio</span></a>
+    <a class="brand" href="/" aria-label="Gridly AI Studio, início">Gridly <span>AI Studio</span></a>
     <nav class="site-nav" id="site-nav" aria-label="Principal">
       <a href="/#projetos" data-i18n="nav.projects">Projetos</a>
       <a href="/#servicos" data-i18n="nav.services">Serviços</a>
@@ -182,7 +184,7 @@ const contactSection = `
     <p class="label col-label" data-i18n="ct.label">Contato</p>
     <div class="col-main">
       <h2 class="h-section ct-title" id="ct-t"><span class="ln" data-i18n="ct.t1">Tem um projeto em mente?</span> <span class="ln" data-i18n="ct.t2">Vamos conversar.</span></h2>
-      <p class="body measure" data-i18n="ct.p">Me conta o que você está construindo — uma página, um lançamento ou uma marca — e eu respondo com os próximos passos.</p>
+      <p class="body measure" data-i18n="ct.p">Me conta o que você está construindo, seja uma página, um lançamento ou uma marca, e eu respondo com os próximos passos.</p>
       <div class="ct-actions">
         <a class="btn" href="mailto:${EMAIL}?subject=Projeto%20com%20a%20Gridly"><span data-i18n="ct.cta">Enviar um e-mail</span> ↗</a>
         <span class="caption ct-alt"><span data-i18n="ct.alt">Também no</span> <a href="${BEHANCE}" target="_blank" rel="noopener">Behance</a> · <a href="${UPWORK}" target="_blank" rel="noopener">Upwork</a></span>
@@ -193,25 +195,36 @@ const contactSection = `
 </section>`;
 
 // ---------- HOME ----------
-const hm = BY[HERO.main], hc = BY[HERO.crop];
+const hcen = BY[HERO.center];
+const heroCard = (c, i) => {
+  const p = BY[c.slug];
+  if (!p) throw new Error("HERO: unknown slug " + c.slug);
+  const tall = c.img === "full" && p.full;
+  const name = tall ? `p/${p.slug}/full` : thumbName(p);
+  return `
+    <a class="hc${tall ? " hc-tall" : ""}${c.m ? " hc-m" : ""}" href="/projetos/${p.slug}" style="--x:${c.x}%;--y:${c.y}%;--w:${c.w}vw;--i:${i}" data-depth="${c.d}">
+      <span class="hc-in">${img(name, p.title, { eager: i < 5 })}</span>
+      <span class="hc-tag caption"><span data-i18n="cat.${p.cat}">${CATS[p.cat].pt}</span> · <b>${esc(p.title)}</b></span>
+    </a>`;
+};
+const MQ = ["mq.1", "mq.2", "mq.3", "mq.4", "mq.5"];
+const MQ_PT = { "mq.1": "Landing pages", "mq.2": "Páginas de vendas", "mq.3": "Identidade visual", "mq.4": "Sites institucionais", "mq.5": "Lançamentos" };
+const mqSet = MQ.map(k => `<span data-i18n="${k}">${MQ_PT[k]}</span><i>✦</i>`).join("");
 const heroHtml = `
 <section class="hero" aria-labelledby="hero-t">
-  <div class="wrap grid hero-grid">
-    <div class="hero-text">
-      <h1 class="h-display" id="hero-t">Gridly<br>AI Studio</h1>
+  <div class="stage">
+    <div class="hero-brand"><h1 class="h-display" id="hero-t">Gridly <span>AI Studio</span></h1></div>
+    <a class="hc hc-center" href="/projetos/${hcen.slug}" style="--i:0" data-depth="0.15">
+      <span class="hc-in">${img(thumbName(hcen), hcen.title, { eager: true })}</span>
+      <span class="hc-tag caption"><span data-i18n="cat.${hcen.cat}">${CATS[hcen.cat].pt}</span> · <b>${esc(hcen.title)}</b></span>
+    </a>
+    <div class="hero-copy">
       <p class="lead" data-i18n="hero.lead">Estratégia, design e desenvolvimento de páginas para marcas, cursos e lançamentos.</p>
       <a class="btn" href="#projetos"><span data-i18n="hero.cta">Explorar projetos</span> ↗</a>
-    </div>
-    <a class="hero-main" href="/projetos/${hm.slug}">
-      <figure>${img(coverName(hm), hm.title, { eager: true })}</figure>
-      <p class="caption hero-cap"><span data-i18n="cat.${hm.cat}">${CATS[hm.cat].pt}</span><span class="sep" aria-hidden="true">·</span><b>${esc(hm.title)}</b></p>
-    </a>
-    <a class="hero-crop" href="/projetos/${hc.slug}">
-      <figure>${img(`p/${hc.slug}/full`, hc.title, { eager: true })}</figure>
-      <p class="caption hero-cap"><span data-i18n="cat.${hc.cat}">${CATS[hc.cat].pt}</span><span class="sep" aria-hidden="true">·</span><b>${esc(hc.title)}</b></p>
-    </a>
+    </div>${HERO.cards.map((c, i) => heroCard(c, i + 1)).join("")}
   </div>
-</section>`;
+</section>
+<div class="marquee" aria-hidden="true"><div class="mq-track"><span class="mq-set">${mqSet}</span><span class="mq-set">${mqSet}</span></div></div>`;
 
 const featuredHtml = FEATURED.map(({ slug, size, flip }) => {
   const p = BY[slug];
@@ -227,7 +240,7 @@ const homeBody = `${heroHtml}
   <div class="wrap">
     <div class="grid sec-head">
       <p class="label col-label" data-i18n="sel.label">Projetos selecionados</p>
-      <h2 class="h-section col-main" id="sel-t" data-i18n="sel.title">Páginas e marcas feitas para serem entendidas&nbsp;— e escolhidas.</h2>
+      <h2 class="h-section col-main" id="sel-t" data-i18n="sel.title">Páginas e marcas feitas para serem entendidas e escolhidas.</h2>
     </div>
     <div class="works">${featuredHtml}
     </div>
@@ -267,10 +280,10 @@ const homeBody = `${heroHtml}
 ${contactSection}`;
 
 await writeFile("public/index.html", page({
-  title: "Gridly AI Studio — Estratégia, design e desenvolvimento de páginas",
-  titleEn: "Gridly AI Studio — Strategy, design and development of pages",
+  title: "Gridly AI Studio | Estratégia, design e desenvolvimento de páginas",
+  titleEn: "Gridly AI Studio | Strategy, design and development of pages",
   desc: "Estúdio de Gisele Cunha: landing pages, páginas de vendas, sites e identidade visual para marcas, cursos e lançamentos.",
-  og: coverName(hm), body: homeBody, cls: "home",
+  og: thumbName(hcen), body: homeBody, cls: "home",
 }));
 
 // ---------- /projetos ----------
@@ -289,7 +302,7 @@ const listBody = `
       <button type="button" class="chip active" aria-pressed="true" data-filter="all" data-i18n="pl.all">Todos</button>
       ${cats.map(k => `<button type="button" class="chip" aria-pressed="false" data-filter="${k}" data-i18n="cat.${k}">${CATS[k].pt}</button>`).join("\n      ")}
     </div>
-    <div class="pgrid">${PROJECTS.map(p => `
+    <div class="pgrid">${LIST.map(p => `
       <a class="work work-card" href="/projetos/${p.slug}" data-cat="${p.cat}">
         <figure class="work-img">${img(thumbName(p), p.title)}</figure>${caption(p, { heading: "h2" })}
       </a>`).join("")}
@@ -299,20 +312,20 @@ const listBody = `
 ${contactSection}`;
 await mkdir("public/projetos", { recursive: true });
 await writeFile("public/projetos/index.html", page({
-  title: "Todos os projetos — Gridly AI Studio", titleEn: "All projects — Gridly AI Studio",
+  title: "Todos os projetos | Gridly AI Studio", titleEn: "All projects | Gridly AI Studio",
   desc: "Páginas de vendas, landing pages, sites e identidade visual da Gridly AI Studio.", og: "p-agni", body: listBody, cls: "list",
 }));
 
 // ---------- /projetos/<slug> (case template) ----------
-for (const [idx, p] of PROJECTS.entries()) {
-  const nx = PROJECTS[(idx + 1) % PROJECTS.length];
+for (const [idx, p] of LIST.entries()) {
+  const nx = LIST[(idx + 1) % LIST.length];
   const dir = `p/${p.slug}/`;
   const arch = ARCHITECTURE[p.slug];
   const gal = p.gallery.map((_, i) => dir + "g" + (i + 1));
   // Rhythm: first two gallery images large, full page, then the rest (pairs when small)
   const galHtml = (list) => list.map(n => {
     const [w, h] = dims[n] || [1400, 1000];
-    const small = h / w < 0.42; // thin strips (palette, typography) go in pairs
+    const small = h / w < 0.3; // thin strips (palette, typography) go in pairs
     return `<figure class="detail${small ? " detail-strip" : ""}">${img(n, p.title)}</figure>`;
   }).join("\n      ");
   const caseBody = `
@@ -358,7 +371,7 @@ for (const [idx, p] of PROJECTS.entries()) {
         <p class="caption" data-i18n="cs.fullhint">Role dentro do quadro para percorrer a página completa.</p>
         <a class="caption fp-open" href="/assets/${dir}full.webp" target="_blank" rel="noopener"><span data-i18n="cs.fullopen">Abrir em tamanho real</span> ↗</a>
       </div>
-      <div class="fp-frame" tabindex="0" role="region" aria-label="Página completa — ${esc(p.title)}">${img(dir + "full", "Página completa — " + p.title)}</div>
+      <div class="fp-frame" tabindex="0" role="region" aria-label="Página completa: ${esc(p.title)}">${img(dir + "full", "Página completa: " + p.title)}</div>
     </div>` : ""}
     ${gal.length > 2 ? `<div class="wrap details">
       ${galHtml(gal.slice(2))}
@@ -379,7 +392,7 @@ for (const [idx, p] of PROJECTS.entries()) {
 ${contactSection}`;
   await mkdir(`public/projetos/${p.slug}`, { recursive: true });
   await writeFile(`public/projetos/${p.slug}/index.html`, page({
-    title: `${p.title} — Gridly AI Studio`, titleEn: `${p.title} — Gridly AI Studio`,
+    title: `${p.title} | Gridly AI Studio`, titleEn: `${p.title} | Gridly AI Studio`,
     desc: sum(p).pt, og: coverName(p), body: caseBody, cls: "case-page",
   }));
 }

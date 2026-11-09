@@ -1,5 +1,5 @@
 // Portfolio data. Images come from the Behance project modules (downloaded at build time).
-// img lists: file stems (hash6 + projectId + "." + hash) — ".png" is appended.
+// img lists: file stems (hash6 + projectId + "." + hash); ".png" is appended.
 // full = the long full-page capture used in the "hover to scroll" preview.
 
 export const CATS = {
@@ -15,7 +15,7 @@ const s = (id, list) => list.split(" ").map(x => { const [a, b] = x.split("."); 
 export const PROJECTS = [
   {
     slug: "agni-jornada-do-despertar", id: "257161323", cat: "vendas", year: 2026,
-    title: "Agni — Jornada do Despertar", client: "Cláudio Soares", tools: "Figma, Elementor",
+    title: "Agni - Jornada do Despertar", client: "Cláudio Soares", tools: "Figma, Elementor",
     service: { pt: "Estratégia, copy e design", en: "Strategy, copywriting & design" },
     home: "p-agni",
     intro: {
@@ -33,7 +33,7 @@ export const PROJECTS = [
   },
   {
     slug: "leandro-scarpa-fisioterapia", id: "257159265", cat: "inst", year: 2026,
-    title: "Leandro Scarpa — Fisioterapia", client: "Leandro Scarpa", tools: "Figma, Elementor",
+    title: "Leandro Scarpa - Fisioterapia", client: "Leandro Scarpa", tools: "Figma, Elementor",
     service: { pt: "Site institucional", en: "Website" },
     home: "p-scarpa",
     intro: {
@@ -51,7 +51,7 @@ export const PROJECTS = [
   },
   {
     slug: "llubiana-arantes-neurociencia", id: "257158429", cat: "lp", year: 2026,
-    title: "Dra. Llubiana Arantes — Neurociência", client: "Dra. Llubiana Arantes", tools: "Figma, Elementor",
+    title: "Dra. Llubiana Arantes - Neurociência", client: "Dra. Llubiana Arantes", tools: "Figma, Elementor",
     service: { pt: "Landing page", en: "Landing page" },
     home: "p-llubiana",
     intro: {
@@ -69,7 +69,7 @@ export const PROJECTS = [
   },
   {
     slug: "cristianne-fabris-urologia", id: "257158057", cat: "lp", year: 2026,
-    title: "Dra. Cristianne Fabris — Urologia", client: "Dra. Cristianne Fabris", tools: "Figma, Photoshop, Elementor",
+    title: "Dra. Cristianne Fabris - Urologia", client: "Dra. Cristianne Fabris", tools: "Figma, Photoshop, Elementor",
     service: { pt: "Estratégia, copy e design", en: "Strategy, copywriting & design" },
     home: "p-cristianne",
     intro: {
@@ -77,8 +77,8 @@ export const PROJECTS = [
       en: "Landing page for Dr. Cristianne Fabris' intimate health treatments. The goal was to approach a delicate subject with elegance and warmth: a page that conveys medical trust, discretion and care, and invites patients to take the first step without embarrassment.",
     },
     direction: {
-      pt: "A direção visual parte da identidade da doutora — nude, bronze e chocolate, serifa em itálico e fotografia suave — para criar uma experiência feminina, sofisticada e próxima.",
-      en: "The visual direction builds on the doctor's identity — a soft nude-and-bronze palette, italic serif typography and gentle photography — for a feminine, sophisticated and approachable experience.",
+      pt: "A direção visual parte da identidade da doutora: nude, bronze e chocolate, serifa em itálico e fotografia suave, para criar uma experiência feminina, sofisticada e próxima.",
+      en: "The visual direction builds on the doctor's identity: a soft nude-and-bronze palette, italic serif typography and gentle photography, for a feminine, sophisticated and approachable experience.",
     },
     cover: "e92f8d257158057.6ad0f1a545337",
     full: "531a48257158057.6ad0f1a544a34",
@@ -87,7 +87,7 @@ export const PROJECTS = [
   },
   {
     slug: "contima-identidade-visual", id: "257106377", cat: "id", year: 2026,
-    title: "Contima — Identidade Visual", client: "Contima", tools: "Figma, Illustrator, Photoshop",
+    title: "Contima", client: "Contima", tools: "Figma, Illustrator, Photoshop",
     service: { pt: "Identidade visual", en: "Brand identity" },
     home: "p-contima",
     intro: {
@@ -105,7 +105,7 @@ export const PROJECTS = [
   },
   {
     slug: "diogo-viana-dia-do-medico", id: "240603275", cat: "lancamento", year: 2025,
-    title: "Dr. Diogo Viana — Dia do Médico", client: "Dr. Diogo Viana", tools: "Figma, Elementor",
+    title: "Dr. Diogo Viana - Dia do Médico", client: "Dr. Diogo Viana", tools: "Figma, Elementor",
     service: { pt: "Identidade, criativos e landing page", en: "Identity, creatives & landing page" },
     home: "p-diogo",
     intro: {
@@ -158,7 +158,7 @@ export const PROJECTS = [
   },
   {
     slug: "forza-club-carol-cantelli", id: "239403999", cat: "lp", year: 2025,
-    title: "Desafio Forza Club — Carol Cantelli", client: "Carol Cantelli · Forza Club", tools: "Figma",
+    title: "Desafio Forza Club - Carol Cantelli", client: "Carol Cantelli · Forza Club", tools: "Figma",
     service: { pt: "Landing page", en: "Landing page" },
     intro: {
       pt: "Projeto criado como parte de um desafio promovido pela Forza Club para a expert Carol Cantelli.",
@@ -204,7 +204,7 @@ export const PROJECTS = [
   },
   {
     slug: "cbef-congresso", id: null, cat: "id", year: 2026,
-    title: "CBEF — Congresso de Endocrinologia Feminina", client: "CBEF", tools: "Figma, Illustrator",
+    title: "CBEF - Congresso de Endocrinologia Feminina", client: "CBEF", tools: "Figma, Illustrator",
     service: { pt: "Identidade visual do evento", en: "Event visual identity" },
     home: "p-cbef",
     intro: {

@@ -1,20 +1,56 @@
 // ------------------------------------------------------------------
-// Home configuration — edit here to change what appears on the home.
-// Slugs come from projects.mjs. Order in FEATURED = order on the page.
-// size: "wide" (big image + caption column) or "half" (two side by side;
-// put "half" items in pairs). flip: caption on the left.
+// Home configuration: edit here to change what appears on the site.
+// Slugs come from projects.mjs.
 // ------------------------------------------------------------------
+
+// Order of the "Todos os projetos" page (and of "Próximo projeto" in the cases).
+export const ORDER = [
+  "contima-identidade-visual",
+  "leandro-scarpa-fisioterapia",
+  "llubiana-arantes-neurociencia",
+  "cristianne-fabris-urologia",
+  "agni-jornada-do-despertar",
+  "diogo-viana-dia-do-medico",
+  "cbef-congresso",
+  "pos-podologia-clinica",
+  "protocolo-360-brows",
+  "forza-club-carol-cantelli",
+  "saude-funcional-raciocinio-clinico",
+  "pos-biomecanica-clinica",
+];
+
+// Opening (Voy-style wall of work). center = main project.
+// Cards: x / y = position in % of the screen, w = width in vw,
+// d = depth for the parallax (0 = still, 1 = moves the most),
+// img: "thumb" (cover) or "full" (top of the full page, portrait crop),
+// m: true = also shown on mobile.
 export const HERO = {
-  main: "agni-jornada-do-despertar",     // large cover
-  crop: "leandro-scarpa-fisioterapia",   // tall crop of the full page
+  center: "contima-identidade-visual",
+  cards: [
+    { slug: "agni-jornada-do-despertar", img: "thumb", x: -2, y: -7, w: 16, d: 0.6, m: true },
+    { slug: "leandro-scarpa-fisioterapia", img: "full", x: 23, y: -12, w: 10, d: 0.35 },
+    { slug: "cristianne-fabris-urologia", img: "thumb", x: 66, y: -5, w: 13, d: 0.5, m: true },
+    { slug: "diogo-viana-dia-do-medico", img: "thumb", x: 88, y: 8, w: 15, d: 0.8 },
+    { slug: "llubiana-arantes-neurociencia", img: "full", x: -5, y: 42, w: 9, d: 0.9 },
+    { slug: "pos-podologia-clinica", img: "full", x: 93, y: 46, w: 9, d: 0.4 },
+    { slug: "protocolo-360-brows", img: "thumb", x: 6, y: 80, w: 14, d: 0.7 },
+    { slug: "cbef-congresso", img: "thumb", x: 30, y: 84, w: 13, d: 0.45, m: true },
+    { slug: "saude-funcional-raciocinio-clinico", img: "thumb", x: 56, y: 82, w: 15, d: 0.65 },
+    { slug: "forza-club-carol-cantelli", img: "thumb", x: 80, y: 78, w: 12, d: 0.55, m: true },
+  ],
 };
 
+// "Projetos selecionados" on the home, in this order.
+// size: "wide" (big image + caption column) or "half" (two side by side; use in pairs).
+// flip: caption on the left.
 export const FEATURED = [
-  { slug: "cristianne-fabris-urologia", size: "wide" },
+  { slug: "contima-identidade-visual", size: "wide" },
+  { slug: "leandro-scarpa-fisioterapia", size: "half" },
   { slug: "llubiana-arantes-neurociencia", size: "half" },
-  { slug: "pos-podologia-clinica", size: "half" },
-  { slug: "contima-identidade-visual", size: "wide", flip: true },
+  { slug: "cristianne-fabris-urologia", size: "wide", flip: true },
+  { slug: "agni-jornada-do-despertar", size: "half" },
   { slug: "diogo-viana-dia-do-medico", size: "half" },
+  { slug: "pos-podologia-clinica", size: "half" },
   { slug: "protocolo-360-brows", size: "half" },
 ];
 
@@ -34,7 +70,7 @@ export const SUMMARY = {
   "cbef-congresso": { pt: "Identidade visual de um congresso médico: símbolo, credenciais e peças do evento.", en: "Visual identity for a medical congress: symbol, badges and event collateral." },
 };
 
-// Optional "Arquitetura de Conversão" block per case: the page sections in order.
+// Optional "Arquitetura da página" block per case: the page sections in order.
 // Leave empty until there is real material to show. Example:
 // "agni-jornada-do-despertar": { pt: ["Promessa e prova", "..."], en: ["...", "..."] },
 export const ARCHITECTURE = {};
