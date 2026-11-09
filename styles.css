@@ -224,4 +224,4 @@ img{display:block;max-width:100%}
   .car-btn{display:none}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal,.hero-title,.hero-hello,.hero-sub,.hero-ctas,.socials{opacity:1;transform:none}}
-@media (max-width:900px){.subpage .nav a.nav-back{display:inline}}
+@media (max-width:900px){.subpage .nav a.nav-back{display:inline!important}}
