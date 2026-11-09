@@ -93,10 +93,10 @@ const EN = {
   "sv.1.t": "Pages that sell", "sv.1.p": "Landing pages, sales pages and websites. I plan the page structure, design it in Figma and build it in Elementor/WordPress, Framer or Wix. I also audit and improve pages that already exist.",
   "sv.2.t": "Launches & campaigns", "sv.2.p": "Opt-in, sales and thank-you pages organized as one funnel, plus feed and stories ad creatives for each phase.",
   "sv.3.t": "Visual identity", "sv.3.p": "Logo, brand guidelines and key visual, unfolded into event collateral, social media and the pages themselves.",
-  "ab.label": "About", "ab.title": "A one-person studio, from strategy to a live page.",
-  "ab.p1": "Gridly AI Studio is the studio of Gisele Cunha, a designer and digital strategist based in Gaspar, Brazil. It creates pages and visual identities for brands, courses and launches, with plenty of experience in health and education.",
-  "ab.p2": "Before the layout comes the architecture: what the visitor needs to see, and in what order, before deciding. That is what the studio calls Conversion Architecture.",
-  "ab.s1": "years designing pages", "ab.s2": "published projects",
+  "ab.label": "About", "ab.title": "Creativity and technology, from first sketch to a live page.",
+  "ab.p1": "I'm Gisele Cunha, a digital designer and the founder of Gridly AI Studio. I create visual identities, campaigns and pages, and I also build what I design: from the first sketch in Figma to the published website.",
+  "ab.p2": "I like exploring possibilities and looking after the details that make a difference, combining aesthetics and function so every project looks good and works simply, from idea to launch.",
+  "ab.s1": "years of experience", "ab.s2": "projects delivered",
   "ct.label": "Contact", "ct.t1": "Have a project in mind?", "ct.t2": "Let's talk.",
   "ct.p": "Tell me what you are building, whether a page, a launch or a brand, and I will reply with next steps.",
   "cur.view": "View case", "mq.1": "Landing pages", "mq.2": "Sales pages", "mq.3": "Visual identity", "mq.4": "Websites", "mq.5": "Launches",
@@ -266,12 +266,12 @@ const homeBody = `${heroHtml}
   <div class="wrap grid">
     <p class="label col-label" data-i18n="ab.label">Sobre</p>
     <div class="about-text">
-      <h2 class="h-section" id="ab-t" data-i18n="ab.title">Um estúdio enxuto, da estratégia à página no ar.</h2>
-      <p class="body" data-i18n="ab.p1">A Gridly AI Studio é o estúdio de Gisele Cunha, designer e estrategista digital em Gaspar, SC. Cria páginas e identidades visuais para marcas, cursos e lançamentos, com bastante experiência em saúde e educação.</p>
-      <p class="body" data-i18n="ab.p2">Antes do layout vem a arquitetura: o que o visitante precisa ver, e em que ordem, até tomar a decisão. É isso que o estúdio chama de Arquitetura de Conversão.</p>
+      <h2 class="h-section" id="ab-t" data-i18n="ab.title">Criatividade e tecnologia, do rascunho à página no ar.</h2>
+      <p class="body" data-i18n="ab.p1">Sou Gisele Cunha, designer digital e fundadora da Gridly AI Studio. Crio identidades visuais, campanhas e páginas, e também desenvolvo o que desenho: do primeiro rascunho no Figma ao site publicado.</p>
+      <p class="body" data-i18n="ab.p2">Gosto de explorar possibilidades e de cuidar dos detalhes que fazem diferença, unindo estética e funcionalidade para que cada projeto seja bonito de ver e simples de usar, da ideia à execução.</p>
       <dl class="facts">
-        <div><dt>4+</dt><dd class="caption" data-i18n="ab.s1">anos criando páginas</dd></div>
-        <div><dt>20+</dt><dd class="caption" data-i18n="ab.s2">projetos publicados</dd></div>
+        <div><dt>4+</dt><dd class="caption" data-i18n="ab.s1">anos de experiência</dd></div>
+        <div><dt>200+</dt><dd class="caption" data-i18n="ab.s2">projetos realizados</dd></div>
       </dl>
     </div>
     <figure class="about-photo"><div class="photo" role="img" aria-label="Gisele Cunha"></div><figcaption class="caption">Gisele Cunha</figcaption></figure>
