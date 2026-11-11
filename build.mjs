@@ -100,7 +100,7 @@ const EN = {
   "ct.label": "Contact", "ct.t1": "Have a project in mind?", "ct.t2": "Let's talk.",
   "ct.p": "Tell me what you are building, whether a page, a launch or a brand, and I will reply with next steps.",
   "cur.view": "View case", "mq.1": "Landing pages", "mq.2": "Sales pages", "mq.3": "Visual identity", "mq.4": "Websites", "mq.5": "Launches",
-  "ct.cta": "Send an email", "ct.alt": "Also on",
+  "ct.cta": "Send a message", "ct.alt": "Also on",
   "ft.r": "All rights reserved",
   "pl.label": "Portfolio", "pl.title": "All projects",
   "pl.lead": "Sales pages, landing pages, websites and visual identity. Open a project to see the full case.",
@@ -186,7 +186,7 @@ const contactSection = `
       <h2 class="h-section ct-title" id="ct-t"><span class="ln" data-i18n="ct.t1">Tem um projeto em mente?</span> <span class="ln" data-i18n="ct.t2">Vamos conversar.</span></h2>
       <p class="body measure" data-i18n="ct.p">Me conta o que você está construindo, seja uma página, um lançamento ou uma marca, e eu respondo com os próximos passos.</p>
       <div class="ct-actions">
-        <a class="btn" href="mailto:${EMAIL}?subject=Projeto%20com%20a%20Gridly"><span data-i18n="ct.cta">Enviar um e-mail</span> ↗</a>
+        <a class="btn" href="https://wa.me/5547991384939" target="_blank" rel="noopener"><span data-i18n="ct.cta">Enviar uma mensagem</span> ↗</a>
         <span class="caption ct-alt"><span data-i18n="ct.alt">Também no</span> <a href="${BEHANCE}" target="_blank" rel="noopener">Behance</a> · <a href="${UPWORK}" target="_blank" rel="noopener">Upwork</a></span>
       </div>
       <p class="caption ct-mail">${EMAIL}</p>
