@@ -1,91 +1,206 @@
-// --- i18n -----------------------------------------------------------
-const EN = {
-  "nav.home":"Home","nav.projects":"Projects","nav.services":"Services","nav.about":"About","nav.contact":"Contact",
-  "hero.hello":"Hi, I'm","hero.t1":"Conversion","hero.t2":"Architecture",
-  "hero.sub":"Landing pages, sales pages and visual identity for health professionals, educators and course creators who want to sell with strategy.",
-  "hero.cta1":"See projects","hero.cta2":"Get a quote",
-  "st.pre":"Every project here combines","st.a":"strategy","st.b":"design","st.c":"conversion",
-  "st.post":"to solve a real problem: turning an audience into sales.",
-  "tag.identity":"Visual Identity","tag.event":"Event","tag.sales":"Sales Page","tag.launch":"Launch","tag.inst":"Website",
-  "p.cbef":"CBEF — Medical Congress Identity","p.bio":"Post-Grad in Clinical Biomechanics","p.pod":"Post-Grad in Clinical Podiatry",
-  "p.llu":"Dr. Llubiana Arantes — Neuroscience","p.cri":"Dr. Cristianne Fabris — Urology","p.sca":"Leandro Scarpa — Physiotherapy",
-  "p.con":"Contima — Accounting Firm","p.agn":"Agni — Self-Discovery Journey",
-  "proj.all":"See all projects",
-  "diag.t":"Conversion Audit","diag.p":"I review your pages and pinpoint what may be <b>holding back your sales.</b>","diag.cta":"Request an audit",
-  "sv.t1":"What I can","sv.t2":"solve for you","sv.p":"I combine conversion strategy and design to build pages and brands that sell — not just look good.",
-  "sv.a.t":"Landing pages & sales pages","sv.a.1":"Page strategy and architecture, section by section","sv.a.2":"Design in Figma, truly responsive","sv.a.3":"Build in Elementor/WordPress, Framer or Wix","sv.a.4":"Audit and optimization of existing pages",
-  "sv.b.t":"Launch strategy","sv.b.1":"Opt-in, sales and thank-you pages","sv.b.2":"Organized funnels for events and campaigns","sv.b.3":"Feed and stories ad creatives",
-  "sv.c.t":"Visual identity & social","sv.c.1":"Logo, brand guidelines and key visual","sv.c.2":"Event collateral: badges, kits, signage","sv.c.3":"Carousels and social media templates",
-  "la.t":"Launch Strategy","la.p":"Pages and funnels strategically organized for experts who want to launch with more predictability.","la.cta":"Apply for a project",
-  "ab.t1":"Hi, I'm",
-  "ab.p1":"Designer and digital strategist based in Brazil. I started out designing landing pages and today I help health and education professionals who already have an audience but don't yet have a digital structure that sells.",
-  "ab.p2":"I don't just do web design: I plan the architecture of every page — what visitors need to see, and in what order, before they decide.",
-  "ab.s1":"years of experience","ab.s2":"published projects","ab.s3b":"Health","ab.s3":"& education niche",
-  "ct.t":"Let's work together","ct.p":"Whether you're building your online course, preparing a launch or need a page that converts, tell me about your idea.",
-  "ct.cta1":"Request a quote","ct.cta2":"Hire me on Upwork",
-  "fq.t1":"Frequently asked","fq.t2":"questions",
-  "fq.q1":"What services do you offer?","fq.a1":"Landing pages, sales pages, websites, visual identity, event collateral and social media creatives — from strategy to a live page.",
-  "fq.q2":"How does the process work?","fq.a2":"It starts with a brief to understand your goal and audience. Then comes the page architecture, design in Figma, revisions and the build. You follow every step.",
-  "fq.q3":"How long does a project take?","fq.a3":"It depends on the scope. A landing page usually takes 1–2 weeks; brand + page, 3–5 weeks.",
-  "fq.q4":"Which platforms do you build on?","fq.a4":"Elementor/WordPress, Framer and Wix. The design is always done in Figma first.",
-  "fq.q5":"Do you work with clients outside Brazil?","fq.a5":"Yes! I work remotely and serve international clients through Upwork or directly, communicating by message.",
-  "ft.r":"All rights reserved"
-};
-Object.assign(EN, window.EN_EXTRA || {});
-const PT = {};
-document.querySelectorAll("[data-i18n]").forEach(el => PT[el.dataset.i18n] = el.textContent);
-document.querySelectorAll("[data-i18n-html]").forEach(el => PT[el.dataset.i18nHtml] = el.innerHTML);
+// --- i18n (PT is in the HTML; EN comes from window.I18N_EN) ---------
+const EN = window.I18N_EN || {};
+const PT = { "cur.view": "Ver case" };
+document.querySelectorAll("[data-i18n]").forEach(el => { PT[el.dataset.i18n] = el.textContent; });
+let LANG = "pt";
+const t = k => (LANG === "en" ? EN : PT)[k] || PT[k] || "";
 
-function setLang(lang){
-  const dict = lang === "en" ? EN : PT;
-  document.querySelectorAll("[data-i18n]").forEach(el => { const v = dict[el.dataset.i18n]; if (v) el.textContent = v; });
-  document.querySelectorAll("[data-i18n-html]").forEach(el => { const v = dict[el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
-  document.documentElement.lang = lang === "en" ? "en" : "pt-BR";
-  const ds = document.documentElement.dataset;
-  document.title = lang === "en" ? (ds.titleEn || "Gisele Cunha · Gridly AI Studio — Conversion Architecture") : (ds.titlePt || "Gisele Cunha · Gridly AI Studio — Arquitetura de Conversão");
-  document.querySelectorAll(".lang button").forEach(b => b.classList.toggle("active", b.dataset.lang === lang));
-  try { localStorage.setItem("lang", lang); } catch (e) {}
+function setLang(lang) {
+  LANG = lang === "en" ? "en" : "pt";
+  const dict = LANG === "en" ? EN : PT;
+  const touched = new Set();
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const v = dict[el.dataset.i18n];
+    if (v != null && el.textContent !== v) {
+      el.textContent = v;
+      const root = el.closest(".split");
+      if (root) touched.add(root);
+    }
+  });
+  touched.forEach(r => splitWords(r));
+  const root = document.documentElement;
+  root.lang = LANG === "en" ? "en" : "pt-BR";
+  document.title = LANG === "en" ? root.dataset.titleEn : root.dataset.titlePt;
+  document.querySelectorAll(".lang button").forEach(b => {
+    const on = b.dataset.lang === LANG;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-pressed", on);
+  });
+  if (cursorLabel) cursorLabel.textContent = t("cur.view");
+  try { localStorage.setItem("lang", LANG); } catch (e) {}
 }
+
+// --- motion setup ----------------------------------------------------
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+const motion = !reduce && "IntersectionObserver" in window;
+if (motion) document.documentElement.classList.add("motion");
+
+// split a heading into words that slide up (keeps nested elements/i18n spans)
+function splitWords(root) {
+  let i = 0;
+  const walk = node => {
+    [...node.childNodes].forEach(n => {
+      if (n.nodeType === 3) {
+        const parts = n.textContent.split(/(\s+)/);
+        const frag = document.createDocumentFragment();
+        parts.forEach(p => {
+          if (!p) return;
+          if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+          const w = document.createElement("span"); w.className = "w";
+          const inner = document.createElement("span"); inner.textContent = p; inner.style.setProperty("--wi", i++);
+          w.appendChild(inner); frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1 && !n.classList.contains("w")) walk(n);
+    });
+  };
+  walk(root);
+}
+
+// --- language init -----------------------------------------------------
+let cursorLabel = null;
 document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
 let saved = null;
 try { saved = localStorage.getItem("lang"); } catch (e) {}
 const urlLang = new URLSearchParams(location.search).get("lang");
 const initial = urlLang || saved || ((navigator.language || "pt").toLowerCase().startsWith("pt") ? "pt" : "en");
-if (initial === "en") setLang("en");
 
-// --- carousel -------------------------------------------------------
-const car = document.getElementById("carousel");
-if (car) {
-  const step = () => (car.querySelector(".card")?.offsetWidth || 360) + 18;
-  document.querySelector(".car-btn.prev").addEventListener("click", () => car.scrollBy({ left: -step(), behavior: "smooth" }));
-  document.querySelector(".car-btn.next").addEventListener("click", () => car.scrollBy({ left: step(), behavior: "smooth" }));
+// --- reveal on scroll ---------------------------------------------------
+if (motion) {
+  document.querySelectorAll(".h-section, .h-case, .h-page").forEach(el => { el.classList.add("split"); splitWords(el); });
+  document.querySelectorAll(".sec-head .label, .lead:not(.hero-copy .lead), .body, .cap, .svc li, .facts, .ct-actions, .ct-mail, .filters, .case-cat, .back, .ctx-facts, .fp-note, .case-close .col-label, .next > .label, .about-photo figcaption")
+    .forEach(el => el.classList.add("fu"));
+  document.querySelectorAll(".work-img, .detail, .case-cover, .about-photo .photo, .fp-frame").forEach(el => el.classList.add("ir"));
+
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    el.classList.add("in");
+    if (el.classList.contains("ir")) setTimeout(() => el.classList.add("done"), 1500);
+    if (el.classList.contains("facts")) countUp(el);
+    io.unobserve(el);
+  }), { rootMargin: "0px 0px -10% 0px", threshold: 0.01 });
+  document.querySelectorAll(".split, .fu, .ir").forEach(el => io.observe(el));
+}
+setLang(initial);
+
+// count 0 → N for "4+", "20+"
+function countUp(box) {
+  box.querySelectorAll("dt").forEach(dt => {
+    const m = dt.textContent.match(/^(\d+)(.*)$/);
+    if (!m) return;
+    const end = +m[1], suf = m[2], t0 = performance.now(), dur = 1400;
+    const step = now => {
+      const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      dt.textContent = Math.round(end * e) + suf;
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+}
+
+// --- scroll-driven: header, hero wall, image parallax -------------------
+const stage = document.querySelector(".stage");
+const cards = stage ? [...stage.querySelectorAll(".hc")].map(el => ({ el: el.querySelector(".hc-in"), d: +el.dataset.depth || 0.3 })) : [];
+const pars = motion ? [...document.querySelectorAll(".ir")].filter(el => !el.classList.contains("fp-frame")) : [];
+let mx = 0, my = 0, cx = 0, cy = 0, lastY = window.scrollY, ticking = false;
+const desktopWall = () => window.innerWidth > 760;
+
+function frame() {
+  ticking = false;
+  const y = window.scrollY, vh = window.innerHeight;
+  // header hides on the way down, comes back on the way up
+  const menuOpen = document.body.classList.contains("menu-open");
+  document.body.classList.toggle("head-hidden", !menuOpen && y > 160 && y > lastY + 2);
+  if (y < lastY - 2 || y < 160) document.body.classList.remove("head-hidden");
+  lastY = y;
+  if (!motion) return;
+  // hero wall: mouse + scroll parallax, fade as it leaves
+  if (stage && desktopWall()) {
+    cx += (mx - cx) * 0.08; cy += (my - cy) * 0.08;
+    const p = Math.min(1, y / vh);
+    stage.style.setProperty("--fade", p.toFixed(3));
+    cards.forEach(c => {
+      const tx = cx * c.d * 34, ty = cy * c.d * 26 - y * c.d * 0.45;
+      c.el.style.transform = `translate3d(${tx.toFixed(1)}px,${ty.toFixed(1)}px,0)`;
+    });
+    if (Math.abs(mx - cx) > 0.001 || Math.abs(my - cy) > 0.001) request();
+  }
+  // images drift inside their frames
+  pars.forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.bottom < -100 || r.top > vh + 100) return;
+    const k = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2); // -1..1
+    const img = el.querySelector("img");
+    if (img) img.style.setProperty("--py", (k * -3.2).toFixed(2) + "%");
+  });
+}
+function request() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+window.addEventListener("scroll", request, { passive: true });
+window.addEventListener("resize", request);
+if (motion && fine && stage) {
+  window.addEventListener("mousemove", e => {
+    mx = e.clientX / window.innerWidth - 0.5;
+    my = e.clientY / window.innerHeight - 0.5;
+    request();
+  }, { passive: true });
+}
+request();
+
+// --- cursor bubble on projects (mouse only) ---------------------------
+if (motion && fine) {
+  const cur = document.createElement("div");
+  cur.className = "cursor"; cur.setAttribute("aria-hidden", "true");
+  cursorLabel = document.createElement("span"); cursorLabel.textContent = t("cur.view");
+  cur.appendChild(cursorLabel); document.body.appendChild(cur);
+  let px = -200, py = -200, qx = -200, qy = -200, running = false;
+  const loop = () => {
+    qx += (px - qx) * 0.2; qy += (py - qy) * 0.2;
+    cur.style.transform = `translate3d(${qx.toFixed(1)}px,${qy.toFixed(1)}px,0)`;
+    if (Math.abs(px - qx) > 0.3 || Math.abs(py - qy) > 0.3) requestAnimationFrame(loop); else running = false;
+  };
+  window.addEventListener("mousemove", e => {
+    px = e.clientX; py = e.clientY;
+    if (!running) { running = true; requestAnimationFrame(loop); }
+  }, { passive: true });
+  document.querySelectorAll(".work, .hc").forEach(a => {
+    a.addEventListener("mouseenter", () => cur.classList.add("on"));
+    a.addEventListener("mouseleave", () => cur.classList.remove("on"));
+  });
+  // buttons lean toward the pointer
+  document.querySelectorAll(".btn").forEach(b => {
+    b.addEventListener("mousemove", e => {
+      const r = b.getBoundingClientRect();
+      b.style.transform = `translate(${((e.clientX - r.left) / r.width - 0.5) * 10}px,${((e.clientY - r.top) / r.height - 0.5) * 8}px)`;
+    });
+    b.addEventListener("mouseleave", () => { b.style.transform = ""; });
+  });
+}
+
+// --- mobile menu ----------------------------------------------------
+const menuBtn = document.querySelector(".menu-btn");
+const nav = document.getElementById("site-nav");
+if (menuBtn && nav) {
+  menuBtn.addEventListener("click", () => {
+    const open = menuBtn.getAttribute("aria-expanded") !== "true";
+    menuBtn.setAttribute("aria-expanded", open);
+    document.body.classList.toggle("menu-open", open);
+  });
+  nav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    menuBtn.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("menu-open");
+  }));
 }
 
 // --- project filters ------------------------------------------------
-document.querySelectorAll(".filters button").forEach(b => b.addEventListener("click", () => {
-  document.querySelectorAll(".filters button").forEach(x => x.classList.toggle("active", x === b));
+const chips = document.querySelectorAll(".filters .chip");
+chips.forEach(b => b.addEventListener("click", () => {
+  chips.forEach(x => { const on = x === b; x.classList.toggle("active", on); x.setAttribute("aria-pressed", on); });
   const f = b.dataset.filter;
-  document.querySelectorAll(".plist .pcard").forEach(c => { c.hidden = f !== "all" && c.dataset.cat !== f; });
+  document.querySelectorAll(".pgrid .work-card").forEach(c => {
+    const show = f === "all" || c.dataset.cat === f;
+    c.hidden = !show;
+    if (show && motion) { c.querySelectorAll(".fu, .ir").forEach(x => x.classList.add("in")); }
+  });
 }));
-
-// --- full-page preview: hover to scroll ------------------------------
-const canHover = window.matchMedia("(hover: hover)").matches;
-document.querySelectorAll(".preview").forEach(pv => {
-  const im = pv.querySelector("img");
-  if (!canHover) return;
-  const go = down => {
-    const dist = Math.max(0, im.offsetHeight - pv.clientHeight);
-    im.style.transitionDuration = (down ? Math.max(2, dist / 450) : Math.max(1, dist / 2500)) + "s";
-    im.style.transform = down ? `translateY(-${dist}px)` : "translateY(0)";
-  };
-  pv.addEventListener("mouseenter", () => go(true));
-  pv.addEventListener("mouseleave", () => go(false));
-  pv.addEventListener("focus", () => go(true));
-  pv.addEventListener("blur", () => go(false));
-});
-
-// --- reveal on scroll ------------------------------------------------
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
-}, { threshold: 0.12 });
-document.querySelectorAll(".reveal").forEach(el => io.observe(el));
