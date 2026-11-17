@@ -35,7 +35,7 @@ export const HERO = {
     { slug: "llubiana-arantes-neurociencia", img: "full", x: -5, y: 42, w: 9, d: 0.9 },
     { slug: "pos-podologia-clinica", img: "full", x: 93, y: 46, w: 9, d: 0.4 },
     { slug: "protocolo-360-brows", img: "thumb", x: 6, y: 80, w: 14, d: 0.7 },
-    { slug: "cbef-congresso", img: "thumb", x: 30, y: 84, w: 13, d: 0.45, m: true },
+    { slug: "dr-iuri-schreiner-medicina", img: "thumb", x: 30, y: 84, w: 13, d: 0.45, m: true },
     { slug: "saude-funcional-raciocinio-clinico", img: "thumb", x: 56, y: 82, w: 15, d: 0.65 },
     { slug: "forza-club-carol-cantelli", img: "thumb", x: 80, y: 78, w: 12, d: 0.55, m: true },
   ],
