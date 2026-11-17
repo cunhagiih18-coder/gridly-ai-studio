@@ -23,8 +23,9 @@ const assets = [
   ["p-scarpa", [BH + "50d3cf257159265.Y3JvcCw4MDgsNjMyLDAsMA.png"], 900],
   ["p-contima", [BH + "714063257106377.Y3JvcCwxNDE3LDExMDksMCww.png"], 900],
   ["p-agni", [BH + "d0aae7257161323.Y3JvcCwxMzczLDEwNzQsMTMsMA.png"], 900],
+  ["p-iuri", [BH + "11399e258633783.Y3JvcCwxMzk5LDEwOTUsMCww.jpg", "https://mir-s3-cdn-cf.behance.net/projects/404/11399e258633783.Y3JvcCwxMzk5LDEwOTUsMCww.jpg"], 900],
 ];
-const mod = f => [MOD + "1400/" + f + ".png", MOD + "source/" + f + ".png", MOD + "max_3840_webp/" + f + ".png"];
+const mod = f => /\.(jpe?g|png|gif)$/.test(f) ? [MOD + "1400/" + f, MOD + "source/" + f, MOD + "max_3840_webp/" + f] : [MOD + "1400/" + f + ".png", MOD + "source/" + f + ".png", MOD + "max_3840_webp/" + f + ".png"];
 for (const p of PROJECTS) {
   const dir = "p/" + p.slug + "/";
   if (p.cover) assets.push([dir + "cover", mod(p.cover), 1400]);
