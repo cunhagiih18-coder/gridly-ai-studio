@@ -50,6 +50,24 @@ export const PROJECTS = [
     behance: "https://www.behance.net/gallery/257159265/Site-Institucional-Leandro-Scarpa-Fisioterapia",
   },
   {
+    slug: "dr-iuri-schreiner-medicina", id: "258633783", cat: "inst", year: 2025,
+    title: "Dr. Iuri Schreiner - Medicina", client: "Dr. Iuri Schreiner", tools: "Figma, Elementor",
+    service: { pt: "Site institucional e blog", en: "Website & blog" },
+    home: "p-iuri",
+    intro: {
+      pt: "Site institucional e blog para o Dr. Iuri Schreiner, médico com atuação em cuidados paliativos. O objetivo era explicar um tema delicado com clareza e acolhimento: o que é o cuidado paliativo, para quem ele é e como funciona o acompanhamento, com consultas domiciliares, controle de sintomas, diretivas antecipadas de vontade e apoio emocional e espiritual, levando direto para o WhatsApp.",
+      en: "Website and blog for Dr. Iuri Schreiner, a physician working in palliative care in Brazil. A clear, gentle and trustworthy experience that explains what palliative care is, who it is for and how follow-up works, leading families straight to WhatsApp.",
+    },
+    direction: {
+      pt: "A direção visual parte do azul-marinho da marca com azul-céu e verde, tipografia Ubuntu e animações de entrada suaves que conduzem a leitura. O blog organiza os artigos por tema, com filtros e paginação.",
+      en: "The visual direction pairs the brand's navy with sky blue and green, Ubuntu typography and soft entrance animations that guide the reading. The blog groups articles by topic, with filters and pagination.",
+    },
+    cover: "b04292258633783.6afc7456e674e.jpg",
+    full: "1f473f258633783.6afc7527bbb04.jpg",
+    gallery: ["45ca47258633783.6afc7456e6b79.jpg", "09cacb258633783.6afc7456e5959.jpg", "84ffce258633783.6afc7456e6fa3.jpg", "82a8e6258633783.6afc7456e5df9.jpg"],
+    behance: "https://www.behance.net/gallery/258633783/Site-Institucional-Dr-Iuri-Schreiner-Medicina",
+  },
+  {
     slug: "llubiana-arantes-neurociencia", id: "257158429", cat: "lp", year: 2026,
     title: "Dra. Llubiana Arantes - Neurociência", client: "Dra. Llubiana Arantes", tools: "Figma, Elementor",
     service: { pt: "Landing page", en: "Landing page" },
