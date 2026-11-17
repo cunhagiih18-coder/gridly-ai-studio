@@ -8,6 +8,7 @@ export const ORDER = [
   "contima-identidade-visual",
   "leandro-scarpa-fisioterapia",
   "llubiana-arantes-neurociencia",
+  "dr-iuri-schreiner-medicina",
   "cristianne-fabris-urologia",
   "agni-jornada-do-despertar",
   "diogo-viana-dia-do-medico",
@@ -47,6 +48,7 @@ export const FEATURED = [
   { slug: "contima-identidade-visual", size: "wide" },
   { slug: "leandro-scarpa-fisioterapia", size: "half" },
   { slug: "llubiana-arantes-neurociencia", size: "half" },
+  { slug: "dr-iuri-schreiner-medicina", size: "wide" },
   { slug: "cristianne-fabris-urologia", size: "wide", flip: true },
   { slug: "agni-jornada-do-despertar", size: "half" },
   { slug: "diogo-viana-dia-do-medico", size: "half" },
@@ -67,10 +69,16 @@ export const SUMMARY = {
   "forza-club-carol-cantelli": { pt: "Landing page de workshop criada em um desafio da Forza Club.", en: "Workshop landing page created in a Forza Club challenge." },
   "saude-funcional-raciocinio-clinico": { pt: "Página de vendas e criativos de divulgação de um programa clínico.", en: "Sales page and promotional creatives for a clinical program." },
   "pos-biomecanica-clinica": { pt: "Página de vendas de uma pós-graduação em Biomecânica.", en: "Sales page for a postgraduate program in Biomechanics." },
+  "dr-iuri-schreiner-medicina": { pt: "Site institucional e blog para um médico, com animações de entrada e caminho direto para o WhatsApp.", en: "Website and blog for a physician, with entrance animations and a direct path to WhatsApp." },
   "cbef-congresso": { pt: "Identidade visual de um congresso médico: símbolo, credenciais e peças do evento.", en: "Visual identity for a medical congress: symbol, badges and event collateral." },
 };
 
 // Optional "Arquitetura da página" block per case: the page sections in order.
 // Leave empty until there is real material to show. Example:
 // "agni-jornada-do-despertar": { pt: ["Promessa e prova", "..."], en: ["...", "..."] },
-export const ARCHITECTURE = {};
+export const ARCHITECTURE = {
+  "dr-iuri-schreiner-medicina": {
+    pt: ["Abertura com o médico", "Pilares do atendimento", "Serviços", "O que são cuidados paliativos", "Condições acompanhadas", "Perguntas frequentes", "Artigos do blog", "Chamada para o WhatsApp"],
+    en: ["Opening with the physician", "Care pillars", "Services", "What palliative care is", "Conditions treated", "FAQ", "Blog articles", "WhatsApp call to action"],
+  },
+};
