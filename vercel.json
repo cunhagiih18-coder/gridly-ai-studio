@@ -1,1 +1,10 @@
-{ "buildCommand": "npm run build", "outputDirectory": "public", "installCommand": "npm install", "framework": null }
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
+  "installCommand": "npm install",
+  "framework": null,
+  "redirects": [
+    { "source": "/en", "destination": "/?lang=en", "permanent": false },
+    { "source": "/pt", "destination": "/?lang=pt", "permanent": false }
+  ]
+}
