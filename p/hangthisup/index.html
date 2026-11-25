@@ -96,8 +96,10 @@ canvas.snow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none
 .notes div{background:#fff;border-radius:12px;padding:16px 18px;font-size:15px;line-height:1.5;color:#444;margin-bottom:14px}
 .notes b{display:block;font:600 12px Oswald;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
 .approve{display:inline-flex;gap:10px;align-items:center;background:var(--green);color:#fff;text-decoration:none;font:700 16px "PT Sans";letter-spacing:.04em;padding:15px 26px;border-radius:99px;margin-top:6px}
-.sign{margin-top:14px;font-size:14px;color:#6a6862}
-.sign a{color:var(--ink)}
+.approve{border:0;cursor:pointer}
+.yes{display:none;background:#eef4e6;border:1.5px solid var(--green);border-radius:12px;padding:16px 18px;font-size:15.5px;line-height:1.5;color:#2f3b22;margin-top:4px}
+.yes.on{display:block;animation:fade .5s forwards}
+.yes b{display:block;font:700 18px "PT Sans";margin-bottom:4px}
 @media (max-width:1100px){.row{grid-template-columns:1fr;justify-items:center}.notes{max-width:560px}.copy{width:46%}.copy p{max-width:100%}.gifts{width:48%}.ktag{display:none}}
 @media (max-width:720px){
  .ban{height:auto;padding:70px 20px 120px}
@@ -158,8 +160,8 @@ canvas.snow{position:absolute;inset:0;width:100%;height:100%;pointer-events:none
    <div><b>What's included · $49</b>Homepage banner (desktop + mobile), a matching Instagram/Facebook post, and the top bar text. Final files sized for your Shopify theme, ready in 48 hours.</div>
    <div><b>Why a gift guide</b>Holiday shoppers don't know which kit to buy. Three clear price points (stocking stuffer, under $100, the big gift) make the choice easy and can lift the average order.</div>
    <div><b>You only pay if you like it</b>Want other products, prices or an "order by" date? I'll adjust it before you pay anything.</div>
-   <a class="approve" href="mailto:cunhagiih18@gmail.com?subject=HangThis%20Up%20gift%20guide%20-%20let's%20do%20it">✓ I like it, let's do it</a>
-   <p class="sign">Gisele Cunha · Web &amp; brand designer · <a href="https://gridly-ai-studio.vercel.app/en">gridly-ai-studio.vercel.app</a></p>
+   <button class="approve" type="button" onclick="document.getElementById('yes').classList.add('on');this.style.display='none'">✓ I like it, let's do it</button>
+   <div class="yes" id="yes"><b>Awesome! 🎉</b>Just reply to my email with a quick "Yes" and I'll send the final files within 48 hours. You only pay once you're happy with them.</div>
   </div>
  </div>
 </div>
