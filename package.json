@@ -2,6 +2,10 @@
   "name": "gisele-cunha-portfolio",
   "private": true,
   "type": "module",
-  "scripts": { "build": "node build.mjs" },
-  "dependencies": { "sharp": "^0.33.5" }
+  "scripts": {
+    "build": "node build.mjs && mkdir -p public/p && cp -r p/. public/p/"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
+  }
 }
